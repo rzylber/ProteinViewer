@@ -12,10 +12,6 @@ window.THREE = THREE;
 window.chevrotain = CHEVROTAIN;
 require('three/examples/js/loaders/VRMLLoader');
 
-const style = {
-    height: 800 // we can control scene size by setting container dimensions
-};
-
 class ThreeWorkspace extends Component {
     componentDidMount() {
         this.sceneSetup();
@@ -31,7 +27,7 @@ class ThreeWorkspace extends Component {
     }    
 
     render() {
-        return <div style={style} ref={ref => (this.el = ref)} />;
+        return <div className="three_container" ref={ref => (this.el = ref)} />;
     }
 
     sceneSetup = () => {
