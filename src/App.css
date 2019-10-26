@@ -1,13 +1,73 @@
 @import "~normalize.css";
 @import "~@blueprintjs/core/lib/css/blueprint.css";
 @import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
+html, body {
+  height: 100%;
+  margin: 0;
+}
 
-.App {
-  text-align: center;
+#root {
+  height: 100%;
+  overflow: hidden;
 }
 
 .app_title {
-  font-family: 'Dancing Script', cursive;
   font-weight: bold;
+  font-family: 'Dancing Script', cursive;
   font-size: 30px;
+}
+
+.container{
+  height: calc(100% - 50px);
+  display: flex;
+  overflow: hidden;
+}
+
+.protein {
+  flex: 6;
+}
+.side {
+  flex: 1;
+  background-color: #000;
+  padding: 20px 20px 0 0;
+}
+
+.bp3-card {
+  margin-bottom: 10px;
+}
+
+.instrucoes {
+  text-align: justify;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.item_legenda {
+  margin-bottom: 10px;
+}
+
+.simbolo_legenda {
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  float: left;
+  margin-right: 10px;
+}
+
+.circle {
+  border-radius: 10px;
+  width: 20px;
+  height: 22px;
+}
+
+.three_container {
+  height: 100%;
+}
+
+.animate {
+  margin-top: 20px;
 }
