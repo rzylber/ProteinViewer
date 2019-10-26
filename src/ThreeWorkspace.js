@@ -4,13 +4,19 @@ import * as THREE from 'three';
 
 import OrbitControls from 'three-orbitcontrols';
 
-import wrml from './models/domain/DomainNative.wrl';
+import wrml1 from './models/domain/DomainNative.wrl';
+import wrml2 from './models/interface/MutanteInterface.wrl';
 
 import * as CHEVROTAIN from 'chevrotain';
 
 window.THREE = THREE;
 window.chevrotain = CHEVROTAIN;
 require('three/examples/js/loaders/VRMLLoader');
+
+const modelsIndex = {
+    'wrml1': wrml1,
+    'wrml2': wrml2,
+}
 
 class ThreeWorkspace extends Component {
     componentDidMount() {
@@ -20,12 +26,19 @@ class ThreeWorkspace extends Component {
         window.addEventListener("resize", this.handleWindowResize);
     }
 
+    componentDidUpdate(prevProps) {
+        if(prevProps.model !== this.props.model) {
+            console.log('MUDA', this.props.model)
+            this.addCustomSceneObjects();
+        }
+    }
+
     componentWillUnmount() {
         window.removeEventListener("resize", this.handleWindowResize);
         window.cancelAnimationFrame(this.requestID);
         this.controls.dispose();
-    }    
-
+    }
+    
     render() {
         return <div className="three_container" ref={ref => (this.el = ref)} />;
     }
@@ -61,12 +74,18 @@ class ThreeWorkspace extends Component {
         this.el.appendChild(this.renderer.domElement); // mount using React ref
     };
 
-    addCustomSceneObjects = () => {        
+    addCustomSceneObjects = () => {
+
+        const { model } = this.props;
+
+        const toRemove = this.scene.getObjectByName('toRemove');
+        if(toRemove) this.scene.remove(toRemove);
 
         const loader = new window.THREE.VRMLLoader();
-        loader.load(wrml, (object) => {
+        loader.load(modelsIndex[model], (object) => {
             this.props.onRendering(false);
 
+            object.name = 'toRemove';
             this.scene.add(object);
         },
         ( xhr ) => {

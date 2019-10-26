@@ -10,11 +10,12 @@ class App extends Component {
     loadProgress: 0,
     rendering: false,
     animating: false,
+    model: 'wrml2', // TODO: first key in list?
   };
 
   render() {
 
-    const { loadProgress, rendering, animating } = this.state;
+    const { loadProgress, rendering, animating, model } = this.state;
 
     return (
       <>
@@ -23,7 +24,7 @@ class App extends Component {
             <Navbar.Heading>
               <span className="app_title">
                 Protein Viewer</span>&nbsp;
-                by <a href="mailto:lumazylber@gmail.com">Luciane Martins</a> and <a target="_blank" href="http://www.ludolab.com.br">Ricardo Zylbergeld</a>
+                by <a href="mailto:lumazylber@gmail.com">Luciane Martins</a> and <a target="_blank" rel="noopener noreferrer" href="http://www.ludolab.com.br">Ricardo Zylbergeld</a>
             </Navbar.Heading>
           </Navbar.Group>
           <Navbar.Group align={Alignment.RIGHT}>
@@ -35,7 +36,7 @@ class App extends Component {
 
         <div className='container'>
           <div className='protein'>
-            <ThreeWorkspace onProgress={this.handleProgress} onRendering={this.handleRendering} />
+            <ThreeWorkspace model={model} onProgress={this.handleProgress} onRendering={this.handleRendering} />
           </div>
           <div className='side'>
 
@@ -49,9 +50,9 @@ class App extends Component {
             <Card interactive={false} elevation={Elevation.FOUR}>
               <div className="title">Selecione o modelo</div>
               <div className="bp3-select bp3-fill">
-                <select defaultValue={"0"}>
-                  <option value="0">Domain Native</option>
-                  <option value="1">Two</option>
+                <select defaultValue={model} onChange={this.handleModelChange}>
+                  <option value="wrml1">Domain Native</option>
+                  <option value="wrml2">Two</option>
                   <option value="2">Three</option>
                   <option value="3">Four</option>
                 </select>
@@ -124,6 +125,10 @@ class App extends Component {
 
   handleProgress = (loadProgress) => {
     this.setState({ loadProgress });
+  }
+
+  handleModelChange = (e) => {
+   this.setState({model: e.target.value});
   }
 
   handleAnimating = () => {
