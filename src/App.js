@@ -68,7 +68,7 @@ class App extends Component {
 
         <div className='container'>
           <div className='protein'>
-            <ThreeWorkspace grupo={grupo} option={option} onProgress={this.handleProgress} onRendering={this.handleRendering} />
+            <ThreeWorkspace animate={animating} grupo={grupo} option={option} onProgress={this.handleProgress} onRendering={this.handleRendering} />
           </div>
           <div className='side'>
 

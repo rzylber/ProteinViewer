@@ -73,14 +73,14 @@ class ThreeWorkspace extends Component {
 
         console.log('OBJECT: grupo/option', grupo, '/', option)
 
-        const toRemove = this.scene.getObjectByName('toRemove');
+        const toRemove = this.scene.getObjectByName('targetObject');
         if(toRemove) this.scene.remove(toRemove);
 
         const loader = new window.THREE.VRMLLoader();
         loader.load(dataBase[grupo].options[option].object, (object) => {
             this.props.onRendering(false);
 
-            object.name = 'toRemove';
+            object.name = 'targetObject';
             this.scene.add(object);
         },
         ( xhr ) => {
@@ -100,8 +100,12 @@ class ThreeWorkspace extends Component {
     };
 
     startAnimationLoop = () => {
-        // this.cube.rotation.x += 0.01;
-        // this.cube.rotation.y += 0.01;
+        if(this.props.animate) {
+            const toAnimate = this.scene.getObjectByName('targetObject');
+            if(toAnimate) {
+                toAnimate.rotation.y += 0.005;
+            }
+        }
 
         this.renderer.render(this.scene, this.camera);
 
