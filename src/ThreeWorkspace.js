@@ -64,6 +64,7 @@ class ThreeWorkspace extends Component {
         this.renderer = new THREE.WebGLRenderer();
         this.renderer.setPixelRatio( window.devicePixelRatio )
         this.renderer.setSize(width, height);
+        // this.renderer.vr.enabled = true;
         this.el.appendChild(this.renderer.domElement); // mount using React ref
     };
 

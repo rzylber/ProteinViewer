@@ -21,11 +21,69 @@ const urlPropsQueryConfig = {
 };
 
 class App extends Component {
-  state = {
-    loadProgress: 0,
-    rendering: false,
-    animating: false,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loadProgress: 0,
+      rendering: false,
+      animating: false,
+    };
+
+    if ('xr' in window.navigator) {
+
+      window.navigator.xr.requestDevice().then(function (device) {
+
+        device.supportsSession({ immersive: true, exclusive: true /* DEPRECATED */ })
+          .then(function () { console.log('showEnterXR', device); })
+          .catch(() => console.log('showVRNotFound'));
+
+      }).catch(() => console.log('showVRNotFound'));
+
+    } else if ('getVRDisplays' in navigator) {
+      window.addEventListener('vrdisplayconnect', function (event) {
+
+        console.log('showEnterVR', event.display);
+
+      }, false);
+
+      window.addEventListener('vrdisplaydisconnect', function (event) {
+
+        console.log('showVRNotFound')
+
+      }, false);
+
+      window.addEventListener('vrdisplaypresentchange', function (event) {
+
+        console.log( event.display.isPresenting ? 'EXIT VR' : 'ENTER VR');
+
+      }, false);
+
+      window.addEventListener('vrdisplayactivate', function (event) {
+
+        console.log('event.display.requestPresent([{ source: renderer.domElement }])');
+
+
+      }, false);
+
+      navigator.getVRDisplays()
+        .then(function (displays) {
+
+          if (displays.length > 0) {
+
+            console.log('showEnterVR', displays[0]);
+
+          } else {
+
+            console.log('showVRNotFound')
+
+          }
+
+        }).catch(() => console.log('showVRNotFound'));
+    } else {
+      console.log('not supported')
+    }
+  }
 
   componentDidMount() {
     // force an update if the URL changes
@@ -40,14 +98,14 @@ class App extends Component {
     let { grupo } = this.props;
 
     // o que não vier preenchido recebe a primeira opção
-    if(!grupo) grupo = Object.keys(dataBase)[0];
-    if(!option) option = Object.keys(dataBase[grupo].options)[0];
+    if (!grupo) grupo = Object.keys(dataBase)[0];
+    if (!option) option = Object.keys(dataBase[grupo].options)[0];
 
     // console.log(this.props, 'QUERY: grupo/option', grupo, '/', option)
 
     const { options: optionsObj, legend: legendItems, description } = dataBase[grupo];
 
-    const options = Object.keys(optionsObj).map( key => optionsObj[key] );
+    const options = Object.keys(optionsObj).map(key => optionsObj[key]);
 
     return (
       <>
@@ -83,10 +141,11 @@ class App extends Component {
               <div className="title">Selecione o modelo</div>
               <div className="bp3-select bp3-fill">
                 <select defaultValue={option} onChange={this.handleModelChange}>
-                  {options.map( ({ value, title }) => <option value={value}>{title}</option>)}
+                  {options.map(({ value, title }) => <option key={value} value={value}>{title}</option>)}
                 </select>
               </div>
               <div className="animate"><Switch checked={animating} label="Animar modelo" onChange={this.handleAnimating} /></div>
+              <div className="animate"><Switch checked={false} label="Habilitar VR" disabled={true} /></div>
             </Card>
 
             <Card interactive={false} elevation={Elevation.FOUR}>
@@ -94,8 +153,8 @@ class App extends Component {
 
               <div>
 
-                {legendItems.map(({color: backgroundColor, text, type}) => <div className="item_legenda clearfix">
-                  <div className={classnames('simbolo_legenda', {'circle': type === 'circle'})} style={{ backgroundColor }}></div>
+                {legendItems.map(({ color: backgroundColor, text, type }, i) => <div key={i} className="item_legenda clearfix">
+                  <div className={classnames('simbolo_legenda', { 'circle': type === 'circle' })} style={{ backgroundColor }}></div>
                   <div className="texto_legenda">{text}</div>
                 </div>)}
               </div>
@@ -119,7 +178,7 @@ class App extends Component {
 
   handleModelChange = (e) => {
     // console.log('option', e.target.value)
-    this.setState({option: e.target.value});
+    this.setState({ option: e.target.value });
   }
 
   handleAnimating = () => {
