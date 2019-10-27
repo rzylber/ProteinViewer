@@ -16,15 +16,14 @@ export const dataBase = {
             The monomers I and II and domain and functional sites were highlighted according with legend. 
             Cartoon and surface representation are available.`,
         legend: [
-            {color: '#fe7575', text: 'Monomer I', type: 'square'},
-            {color: '#65f3f3', text: 'Monomer II', type: 'square'},
-            {color: '#00ff02', text: 'N-terminal alpha-helix', type: 'square'},
-            {color: '#ff2c7e', text: 'Active site vinicity', type: 'square'},
-            {color: '#b64494', text: 'Calcium binding domain', type: 'square'},
-            {color: '#0905c5', text: 'Crown Domain', type: 'square'},
-            {color: '#023462', text: 'Collagem binding domain', type: 'square'},
-            {color: '#f60204', text: 'Mg ion', type: 'circle'},
-            {color: '#fffe00', text: 'Zn ion', type: 'circle'},
+            {color: '#cf7c7c', text: 'Monomer I', type: 'square'},
+            {color: '#29a67c', text: 'Monomer II', type: 'square'},
+            {color: '#127912', text: 'N-terminal alpha-helix', type: 'square'},
+            {color: '#f7408c', text: 'Active site vinicity', type: 'square'},
+            {color: '#a862b4', text: 'Calcium binding domain', type: 'square'},
+            {color: '#3074cb', text: 'Crown Domain', type: 'square'},
+            {color: '#13136d', text: 'Collagem binding domain', type: 'square'},
+            {color: '#ffefef', text: 'Zn and Mg ions', type: 'circle'},
         ],
         options: {
             'wrmlDomain1': {title: 'Native TNSALP Cartoon', value: 'wrmlDomain1', object: wrmlDomain1},
@@ -38,11 +37,10 @@ export const dataBase = {
         The monomers I and II, and predicting protein interface residues were highlighted according with legend. 
         Cartoon and surface representation are available.  `,
         legend: [
-            {color: '#fe7575', text: 'Monomer I', type: 'square'},
-            {color: '#65f3f3', text: 'Monomer II', type: 'square'},
-            {color: '#65f3f3', text: 'Interface residues', type: 'square'},
-            {color: '#f60204', text: 'Mg ion', type: 'circle'},
-            {color: '#fffe00', text: 'Zn ion', type: 'circle'},
+            {color: '#cf7c7c', text: 'Monomer I', type: 'square'},
+            {color: '#29a67c', text: 'Monomer II', type: 'square'},
+            {color: '#841919', text: 'Interface residues', type: 'square'},            
+            {color: '#ffefef', text: 'Zn and Mg ions', type: 'circle'},
         ],
         options: {
             'wrmlInterface1': {title: 'Native TNSALP Cartoon', value: 'wrmlInterface1', object: wrmlInterface1},
