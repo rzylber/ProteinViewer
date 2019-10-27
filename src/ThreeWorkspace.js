@@ -4,19 +4,13 @@ import * as THREE from 'three';
 
 import OrbitControls from 'three-orbitcontrols';
 
-import wrml1 from './models/domain/DomainNative.wrl';
-import wrml2 from './models/interface/MutanteInterface.wrl';
-
 import * as CHEVROTAIN from 'chevrotain';
+
+import { dataBase } from './models';
 
 window.THREE = THREE;
 window.chevrotain = CHEVROTAIN;
 require('three/examples/js/loaders/VRMLLoader');
-
-const modelsIndex = {
-    'wrml1': wrml1,
-    'wrml2': wrml2,
-}
 
 class ThreeWorkspace extends Component {
     componentDidMount() {
@@ -27,8 +21,7 @@ class ThreeWorkspace extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if(prevProps.model !== this.props.model) {
-            console.log('MUDA', this.props.model)
+        if(prevProps.option !== this.props.option) {
             this.addCustomSceneObjects();
         }
     }
@@ -75,14 +68,16 @@ class ThreeWorkspace extends Component {
     };
 
     addCustomSceneObjects = () => {
+        
+        const { grupo, option } = this.props;
 
-        const { model } = this.props;
+        console.log('OBJECT: grupo/option', grupo, '/', option)
 
         const toRemove = this.scene.getObjectByName('toRemove');
         if(toRemove) this.scene.remove(toRemove);
 
         const loader = new window.THREE.VRMLLoader();
-        loader.load(modelsIndex[model], (object) => {
+        loader.load(dataBase[grupo].options[option].object, (object) => {
             this.props.onRendering(false);
 
             object.name = 'toRemove';

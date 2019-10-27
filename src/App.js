@@ -3,19 +3,49 @@ import './App.css';
 
 import { Intent, Navbar, Alignment, ProgressBar, Tag, Card, Elevation, Switch } from "@blueprintjs/core";
 
+import { addUrlProps, UrlQueryParamTypes, replaceInUrlQuery, configureUrlQuery } from 'react-url-query';
+
+// import history from './history';
+
 import ThreeWorkspace from './ThreeWorkspace';
+
+import { dataBase } from './models';
+
+// configureUrlQuery({ history });
+
+const urlPropsQueryConfig = {
+  grupo: { type: UrlQueryParamTypes.string },
+  option: { type: UrlQueryParamTypes.string },
+};
 
 class App extends Component {
   state = {
     loadProgress: 0,
     rendering: false,
     animating: false,
-    model: 'wrml2', // TODO: first key in list?
   };
+
+  componentDidMount() {
+    // force an update if the URL changes
+    // history.listen(() => this.forceUpdate());
+  }
 
   render() {
 
-    const { loadProgress, rendering, animating, model } = this.state;
+    const { loadProgress, rendering, animating } = this.state;
+
+    let { option } = this.state;
+    let { grupo } = this.props;
+
+    // o que não vier preenchido recebe a primeira opção
+    if(!grupo) grupo = Object.keys(dataBase)[0];
+    if(!option) option = Object.keys(dataBase[grupo].options)[0];
+
+    // console.log(this.props, 'QUERY: grupo/option', grupo, '/', option)
+
+    const { options: optionsObj, legend: legendItems } = dataBase[grupo];
+
+    const options = Object.keys(optionsObj).map( key => optionsObj[key] );
 
     return (
       <>
@@ -36,7 +66,7 @@ class App extends Component {
 
         <div className='container'>
           <div className='protein'>
-            <ThreeWorkspace model={model} onProgress={this.handleProgress} onRendering={this.handleRendering} />
+            <ThreeWorkspace grupo={grupo} option={option} onProgress={this.handleProgress} onRendering={this.handleRendering} />
           </div>
           <div className='side'>
 
@@ -50,11 +80,8 @@ class App extends Component {
             <Card interactive={false} elevation={Elevation.FOUR}>
               <div className="title">Selecione o modelo</div>
               <div className="bp3-select bp3-fill">
-                <select defaultValue={model} onChange={this.handleModelChange}>
-                  <option value="wrml1">Domain Native</option>
-                  <option value="wrml2">Two</option>
-                  <option value="2">Three</option>
-                  <option value="3">Four</option>
+                <select defaultValue={option} onChange={this.handleModelChange}>
+                  {options.map( ({ value, title }) => <option value={value}>{title}</option>)}
                 </select>
               </div>
               <div className="animate"><Switch checked={animating} label="Animar modelo" onChange={this.handleAnimating} /></div>
@@ -128,7 +155,8 @@ class App extends Component {
   }
 
   handleModelChange = (e) => {
-   this.setState({model: e.target.value});
+    // console.log('option', e.target.value)
+    this.setState({option: e.target.value});
   }
 
   handleAnimating = () => {
@@ -136,4 +164,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default addUrlProps({ urlPropsQueryConfig })(App);
