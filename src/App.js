@@ -56,7 +56,7 @@ class App extends Component {
             <Navbar.Heading>
               <span className="app_title">
                 Protein Viewer</span>&nbsp;
-                by <a href="mailto:lumazylber@gmail.com">Luciane Martins</a> and <a target="_blank" rel="noopener noreferrer" href="http://www.ludolab.com.br">Ricardo Zylbergeld</a>
+                by <a href="mailto:lumazylber@gmail.com">Luciane Martins Zylberged</a> and <a target="_blank" rel="noopener noreferrer" href="http://www.ludolab.com.br">LudoLab.com.br</a>
             </Navbar.Heading>
           </Navbar.Group>
           <Navbar.Group align={Alignment.RIGHT}>
