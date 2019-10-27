@@ -12,6 +12,9 @@ import wrmlInterface6 from './interface/NativeMutInterfaceSurface.wrl';
 
 export const dataBase = {
     domain: {
+        description: `Native and mutant 3D models of the TNSALP homodimer. 
+            The monomers I and II and domain and functional sites were highlighted according with legend. 
+            Cartoon and surface representation are available.`,
         legend: [
             {color: '#fe7575', text: 'Monomer I', type: 'square'},
             {color: '#65f3f3', text: 'Monomer II', type: 'square'},
@@ -31,6 +34,9 @@ export const dataBase = {
         }
     },
     interface: {
+        description: `Native and mutant 3D models of the TNSALP dimer structure. 
+        The monomers I and II, and predicting protein interface residues were highlighted according with legend. 
+        Cartoon and surface representation are available.  `,
         legend: [
             {color: '#fe7575', text: 'Monomer I', type: 'square'},
             {color: '#65f3f3', text: 'Monomer II', type: 'square'},

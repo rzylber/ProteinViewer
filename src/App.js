@@ -45,7 +45,7 @@ class App extends Component {
 
     // console.log(this.props, 'QUERY: grupo/option', grupo, '/', option)
 
-    const { options: optionsObj, legend: legendItems } = dataBase[grupo];
+    const { options: optionsObj, legend: legendItems, description } = dataBase[grupo];
 
     const options = Object.keys(optionsObj).map( key => optionsObj[key] );
 
@@ -73,9 +73,9 @@ class App extends Component {
           <div className='side'>
 
             <Card interactive={false} elevation={Elevation.FOUR}>
-              <div className="title">Instruções</div>
+              <div className="title">Descrição</div>
               <p className="instrucoes">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pretium blandit dui eu efficitur. Aliquam sit amet urna et nisl blandit tincidunt. Ut odio eros, molestie ac hendrerit ut, rhoncus sed lacus.
+                {description}
               </p>
             </Card>
 
