@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 
+import classnames from 'classnames';
+
 import { Intent, Navbar, Alignment, ProgressBar, Tag, Card, Elevation, Switch } from "@blueprintjs/core";
 
 import { addUrlProps, UrlQueryParamTypes, replaceInUrlQuery, configureUrlQuery } from 'react-url-query';
@@ -91,50 +93,11 @@ class App extends Component {
               <div className="title">Legenda</div>
 
               <div>
-                <div className="item_legenda clearfix">
-                  <div className="simbolo_legenda" style={{ backgroundColor: '#fe7575' }}></div>
-                  <div className="texto_legenda">Monomer I</div>
-                </div>
 
-                <div className="item_legenda clearfix">
-                  <div className="simbolo_legenda" style={{ backgroundColor: '#65f3f3' }}></div>
-                  <div className="texto_legenda">Monomer II</div>
-                </div>
-
-                <div className="item_legenda clearfix">
-                  <div className="simbolo_legenda" style={{ backgroundColor: '#00ff02' }}></div>
-                  <div className="texto_legenda">N-terminal alpha-helix</div>
-                </div>
-
-                <div className="item_legenda clearfix">
-                  <div className="simbolo_legenda" style={{ backgroundColor: '#ff2c7e' }}></div>
-                  <div className="texto_legenda">Active site vinicity</div>
-                </div>
-
-                <div className="item_legenda clearfix">
-                  <div className="simbolo_legenda" style={{ backgroundColor: '#b64494' }}></div>
-                  <div className="texto_legenda">Calcium binding domain</div>
-                </div>
-
-                <div className="item_legenda clearfix">
-                  <div className="simbolo_legenda" style={{ backgroundColor: '#0905c5' }}></div>
-                  <div className="texto_legenda">Crown Domain</div>
-                </div>
-
-                <div className="item_legenda clearfix">
-                  <div className="simbolo_legenda" style={{ backgroundColor: '#023462' }}></div>
-                  <div className="texto_legenda">Collagem binding domain</div>
-                </div>
-
-                <div className="item_legenda clearfix">
-                  <div className="simbolo_legenda circle" style={{ backgroundColor: '#f60204' }}></div>
-                  <div className="texto_legenda">Mg ion</div>
-                </div>
-
-                <div className="item_legenda clearfix">
-                  <div className="simbolo_legenda circle" style={{ backgroundColor: '#fffe00' }}></div>
-                  <div className="texto_legenda">Zn ion</div>
-                </div>
+                {legendItems.map(({color: backgroundColor, text, type}) => <div className="item_legenda clearfix">
+                  <div className={classnames('simbolo_legenda', {'circle': type === 'circle'})} style={{ backgroundColor }}></div>
+                  <div className="texto_legenda">{text}</div>
+                </div>)}
               </div>
             </Card>
 
