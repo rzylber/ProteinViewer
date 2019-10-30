@@ -20,6 +20,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "homepage": "http://ludolab.com.br/lumazy",
   "eslintConfig": {
     "extends": "react-app"
   },
