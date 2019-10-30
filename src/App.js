@@ -5,7 +5,7 @@ import classnames from 'classnames';
 
 import { Intent, Navbar, Alignment, ProgressBar, Tag, Card, Elevation, Switch } from "@blueprintjs/core";
 
-import { addUrlProps, UrlQueryParamTypes, replaceInUrlQuery, configureUrlQuery } from 'react-url-query';
+import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
 
 // import history from './history';
 
