@@ -131,25 +131,25 @@ class App extends Component {
           <div className='side'>
 
             <Card interactive={false} elevation={Elevation.FOUR}>
-              <div className="title">Descrição</div>
+              <div className="title">Description</div>
               <p className="instrucoes">
                 {description}
               </p>
             </Card>
 
             <Card interactive={false} elevation={Elevation.FOUR}>
-              <div className="title">Selecione o modelo</div>
+              <div className="title">Select the model</div>
               <div className="bp3-select bp3-fill">
                 <select defaultValue={option} onChange={this.handleModelChange}>
                   {options.map(({ value, title }) => <option key={value} value={value}>{title}</option>)}
                 </select>
               </div>
-              <div className="animate"><Switch checked={animating} label="Animar modelo" onChange={this.handleAnimating} /></div>
-              <div className="animate"><Switch checked={false} label="Habilitar VR" disabled={true} /></div>
+              <div className="animate"><Switch checked={animating} label="Animate model" onChange={this.handleAnimating} /></div>
+              <div className="animate"><Switch checked={false} label="Enable VR" disabled={true} /></div>
             </Card>
 
             <Card interactive={false} elevation={Elevation.FOUR}>
-              <div className="title">Legenda</div>
+              <div className="title">Legend</div>
 
               <div>
 
